@@ -8,6 +8,11 @@ namespace PaperRockScissor
         static void Main(string[] args)
         {
             List<string> choices = new List<string>() { "Paper", "Rock", "Scissor" };
+            bool playgame = true;
+            string gameOption = "y";
+            Player Player1 = new Player();
+            Player Player2 = new Player();
+            bool validNumberOfPlayers;
 
             Console.WriteLine("Welcome to - Paper Rock Scissor -");
 
@@ -17,9 +22,41 @@ namespace PaperRockScissor
             {
                 do
                 {
+
+                    do
+                    {
+                        // gather player information
+                        Console.Write("1 or 2 players?: ");
+                        int numberOfPlayers = int.Parse(Console.ReadLine());
+                        Console.WriteLine(numberOfPlayers);
+
+                        if (numberOfPlayers == 2)
+                        {
+                            validNumberOfPlayers = true;
+                            Console.WriteLine("Name of player 1: ");
+                            Player1.Name = Console.ReadLine();
+
+                            Console.WriteLine("Name of player 2: ");
+                            Player2.Name = Console.ReadLine();
+                        }
+                        else if (numberOfPlayers == 1)
+                        {
+                            validNumberOfPlayers = true;
+                            Console.WriteLine("Name of player: ");
+                            Player1.Name = Console.ReadLine();
+                        }
+                        else
+                        {
+                            validNumberOfPlayers = false;
+                            Console.WriteLine("Invalid Entry");
+                        }
+                    } while (!validNumberOfPlayers);
+
+                    // start game
                     Console.Write("Choose: Paper, Rock, or Scissor: ");
                     string usrchoice;
                     string compchoice;
+
 
                     // user chooses
                     usrchoice = Console.ReadLine();
@@ -47,11 +84,14 @@ namespace PaperRockScissor
                         Console.WriteLine();
                     }
 
+                    // Play again?
+                    ContinueGame();
                    
-                } while (true);
+                } while (playgame);
                 
             }
 
+            // verifies the players' input
             bool verifyUsrChoice(string usr)
             {
                 if (usr == choices[0] || usr == choices[1] || usr == choices[2])
@@ -76,6 +116,7 @@ namespace PaperRockScissor
                 return choice;
             }
 
+            // determines the winner
             string ComparePicks(string usr, string comp)
             {
                 string WinLose = "null";
@@ -102,6 +143,19 @@ namespace PaperRockScissor
                 }
                  
                 return WinLose;
+            }
+
+            // checks with user if game is to continue
+            void ContinueGame()
+            {
+                Console.Write("Play new game? ('y' or 'n'): ");
+                gameOption = Console.ReadLine();
+
+                if (gameOption.ToString() == "n")
+                {
+                    playgame = false;
+                    Console.WriteLine("Good bye!");
+                }
             }
 
         }
