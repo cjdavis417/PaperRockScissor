@@ -17,34 +17,52 @@ namespace PaperRockScissor
             {
                 do
                 {
-                    Console.WriteLine("Choose: Paper, Rock, or Scissor: ");
+                    Console.Write("Choose: Paper, Rock, or Scissor: ");
                     string usrchoice;
                     string compchoice;
+
+                    // user chooses
                     usrchoice = Console.ReadLine();
+
+                    // computer chooses
                     compchoice = ComputerChoice();
-                    verifyUsrChoice();
 
                     // Verify Users' input
-                    //bool verify = verifyUsrChoice();
+                    bool verifiedusr = verifyUsrChoice(usrchoice);
 
-                    
+                    // output game status
+                    if (verifiedusr)
+                    {
                         Console.WriteLine("Your choice is: " + usrchoice);
                         Console.WriteLine("The computer chose: " + compchoice);
 
+                        // compares user and computer to determine winner.
                         Console.WriteLine("You " + ComparePicks(usrchoice, compchoice) + "!");
                         Console.WriteLine("Play again.");
                         Console.WriteLine();
-                    
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your selection is invalid.  Please try again.");
+                        Console.WriteLine();
+                    }
 
                    
                 } while (true);
                 
             }
 
-            bool verifyUsrChoice()
+            bool verifyUsrChoice(string usr)
             {
-
-                return true;
+                if (usr == choices[0] || usr == choices[1] || usr == choices[2])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
 
             // Generates computers choice
@@ -52,6 +70,8 @@ namespace PaperRockScissor
             {
                 string choice;
                 Random random = new Random(DateTime.Now.Millisecond);
+
+                // selects the List item
                 choice = choices[random.Next(0, 2)];
                 return choice;
             }
@@ -59,9 +79,6 @@ namespace PaperRockScissor
             string ComparePicks(string usr, string comp)
             {
                 string WinLose = "null";
-                //string lowerusr = usr.ToLower();
-                //string lowercomp = comp.ToLower();
-                // test user's input
                 
                 if (usr == comp)
                 {
