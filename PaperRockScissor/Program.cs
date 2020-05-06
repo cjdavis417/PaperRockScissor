@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 
 namespace PaperRockScissor
 {
@@ -8,47 +10,75 @@ namespace PaperRockScissor
         static void Main(string[] args)
         {
             List<string> choices = new List<string>() { "Paper", "Rock", "Scissor" };
-
-            Console.WriteLine("Welcome to - Paper Rock Scissor -");
+            List<Player> GameStatus = new List<Player>();
+            int turnCounter = 0;
+            
 
             NewGame();
 
             void NewGame()
             {
-                do
+                do 
                 {
-                    Console.Write("Choose: Paper, Rock, or Scissor: ");
-                    string usrchoice;
-                    string compchoice;
+                    Console.WriteLine("Welcome to - Paper Rock Scissor -");
+                    Console.WriteLine();
+                    Console.WriteLine("Best out of 10.  It's you versus the computer.");
+                    Console.WriteLine();
+                    Console.Write("What is your name? ");
+                    Player player1 = new Player(Console.ReadLine(), 0, 0, 0);
+                    Player player2 = new Player("Computer", 0, 0, 0);
+                    GameStatus.Add(player1);
+                    GameStatus.Add(player2);
 
-                    // user chooses
-                    usrchoice = Console.ReadLine();
-
-                    // computer chooses
-                    compchoice = ComputerChoice();
-
-                    // Verify Users' input
-                    bool verifiedusr = verifyUsrChoice(usrchoice);
-
-                    // output game status
-                    if (verifiedusr)
+                    
+                    while (turnCounter < 10)
                     {
-                        Console.WriteLine("Your choice is: " + usrchoice);
-                        Console.WriteLine("The computer chose: " + compchoice);
+                        Console.Write("{0}, choose: Paper, Rock, or Scissor: ", player1.PlayerName());
+                        string usrchoice;
+                        string compchoice;
 
-                        // compares user and computer to determine winner.
-                        Console.WriteLine("You " + ComparePicks(usrchoice, compchoice) + "!");
-                        Console.WriteLine("Play again.");
+                        // user chooses
+                        usrchoice = Console.ReadLine();
+
+                        // computer chooses
+                        compchoice = ComputerChoice();
+
+                        // Verify Users' input
+                        bool verifiedusr = verifyUsrChoice(usrchoice);
+
+                        // output game status
+                        if (verifiedusr)
+                        {
+                            Console.WriteLine("Your choice is: " + usrchoice);
+                            Console.WriteLine("The computer chose: " + compchoice);
+
+                            // compares user and computer to determine winner.
+                            Console.WriteLine("You " + ComparePicks(usrchoice, compchoice, player1, player2) + "!");
+                            Console.WriteLine("Play again.");
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your selection is invalid.  Please try again.");
+                            Console.WriteLine();
+                        }
+
+                        turnCounter++;
+       
+                        Console.WriteLine("Here's how you're doing: ");
+                        Console.WriteLine(ReadScore(player1, player2));
                         Console.WriteLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Your selection is invalid.  Please try again.");
-                        Console.WriteLine();
+                        
+
                     }
 
-                   
+                    Console.WriteLine("***** Final Score *****");
+                    Console.WriteLine(ReadScore(player1, player2));
+                    Console.WriteLine("************************");
+                    break;
+
                 } while (true);
+
                 
             }
 
@@ -71,12 +101,12 @@ namespace PaperRockScissor
                 string choice;
                 Random random = new Random(DateTime.Now.Millisecond);
 
-                // selects the List item
+                // selects the List item from the random number
                 choice = choices[random.Next(0, 2)];
                 return choice;
             }
 
-            string ComparePicks(string usr, string comp)
+            string ComparePicks(string usr, string comp, Player player1, Player player2)
             {
                 string WinLose = "null";
                 
@@ -87,21 +117,31 @@ namespace PaperRockScissor
                 else if (usr == "Paper" && comp == "Rock")
                 {
                     WinLose = "win";
+                    player1.Winner();
                 }
                 else if (usr == "Rock" && comp == "Scissor")
                 {
-                WinLose = "win";
+                    WinLose = "win";
+                    player1.Winner();
                 }
                 else if (usr == "Scissor" && comp == "Paper")
                 {
                     WinLose = "win";
+                    player1.Winner();
                 }
                 else
                 {
                     WinLose = "lose";
+                    player2.Winner();
                 }
                  
                 return WinLose;
+            }
+
+            string ReadScore(Player player1, Player player2)
+            {
+                string score = player1.PlayerName() + ": " + player1.PlayerWins() + ", " + player2.PlayerName() + ": " + player2.PlayerWins();
+                return score;
             }
 
         }
