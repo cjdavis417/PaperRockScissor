@@ -23,34 +23,7 @@ namespace PaperRockScissor
                 do
                 {
 
-                    do
-                    {
-                        // gather player information
-                        Console.Write("1 or 2 players?: ");
-                        int numberOfPlayers = int.Parse(Console.ReadLine());
-                        Console.WriteLine(numberOfPlayers);
-
-                        if (numberOfPlayers == 2)
-                        {
-                            validNumberOfPlayers = true;
-                            Console.WriteLine("Name of player 1: ");
-                            Player1.Name = Console.ReadLine();
-
-                            Console.WriteLine("Name of player 2: ");
-                            Player2.Name = Console.ReadLine();
-                        }
-                        else if (numberOfPlayers == 1)
-                        {
-                            validNumberOfPlayers = true;
-                            Console.WriteLine("Name of player: ");
-                            Player1.Name = Console.ReadLine();
-                        }
-                        else
-                        {
-                            validNumberOfPlayers = false;
-                            Console.WriteLine("Invalid Entry");
-                        }
-                    } while (!validNumberOfPlayers);
+                    GatherPlayerInfo();
 
                     // start game
                     Console.Write("Choose: Paper, Rock, or Scissor: ");
@@ -89,6 +62,38 @@ namespace PaperRockScissor
                    
                 } while (playgame);
                 
+            }
+
+            void GatherPlayerInfo()
+            {
+                do
+                {
+                    // gather player information
+                    Console.Write("1 or 2 players?: ");
+                    int numberOfPlayers = int.Parse(Console.ReadLine());
+                    Console.WriteLine(numberOfPlayers);
+
+                    if (numberOfPlayers == 2)
+                    {
+                        validNumberOfPlayers = true;
+                        Console.WriteLine("Name of player 1: ");
+                        Player1.Name = Console.ReadLine();
+
+                        Console.WriteLine("Name of player 2: ");
+                        Player2.Name = Console.ReadLine();
+                    }
+                    else if (numberOfPlayers == 1)
+                    {
+                        validNumberOfPlayers = true;
+                        Console.WriteLine("Name of player: ");
+                        Player1.Name = Console.ReadLine();
+                    }
+                    else
+                    {
+                        validNumberOfPlayers = false;
+                        Console.WriteLine("Invalid Entry");
+                    }
+                } while (!validNumberOfPlayers);
             }
 
             // verifies the players' input
