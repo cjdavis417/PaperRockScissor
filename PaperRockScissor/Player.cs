@@ -15,6 +15,7 @@ namespace PaperRockScissor
         public Player()
         {
          
+
         }
 
 
