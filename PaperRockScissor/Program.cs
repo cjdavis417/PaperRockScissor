@@ -22,7 +22,7 @@ namespace PaperRockScissor
             {
                 do
                 {
-
+                    // gets player information
                     GatherPlayerInfo();
 
                     // start game
