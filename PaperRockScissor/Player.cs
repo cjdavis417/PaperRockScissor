@@ -6,10 +6,10 @@ namespace PaperRockScissor
 {
     class Player
     {
-        private string Name;
-        private int Win;
-        private int Lose;
-        private int Tie;
+        private string Name { get; set; }
+        private int Win { get; set; }
+        private int Lose { get; set; }
+        private int Tie { get; set; }
 
         public Player(string name, int win, int lose, int tie)
         {
@@ -25,7 +25,7 @@ namespace PaperRockScissor
 
         public void Winner() { Win++; }
         public void Looser() { Lose++; }
-        public void Tied() { Tie++; }
+        //public void Tied() { Tie++; }
       
 
 
