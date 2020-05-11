@@ -26,8 +26,12 @@ namespace PaperRockScissor
         public void Winner() { Win++; }
         public void Looser() { Lose++; }
         //public void Tied() { Tie++; }
-      
-
+        
+        // static method. Static methods can be called without being tied to an object
+        public static void PlayerDate()
+        {
+            Console.WriteLine("Today is {0}", DateTime.Now);
+        }
 
     }
 }

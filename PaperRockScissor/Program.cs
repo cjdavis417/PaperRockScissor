@@ -22,6 +22,7 @@ namespace PaperRockScissor
                 {
                     Console.WriteLine("Welcome to - Paper Rock Scissor -");
                     Console.WriteLine();
+                    Player.PlayerDate(); // calls static method
                     Console.WriteLine("Best out of 10.  It's you versus the computer.");
                     Console.WriteLine();
                     Console.Write("What is your name? ");
