@@ -5,6 +5,9 @@ This is work in process.  More complexity will be added over time.
 
 ---
 <dl>
+<dt>May 12, 2020</dt>
+<dd>Created Branch 'GameClass', added class 'Game' </dd>
+
 <dt>May 10th, 2020</dt>
 <dd>Added a static method to the 'Player' class</dd>
 

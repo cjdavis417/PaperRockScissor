@@ -9,8 +9,8 @@ namespace PaperRockScissor
     {
         static void Main(string[] args)
         {
-            List<string> choices = new List<string>() { "Paper", "Rock", "Scissor" };
-            List<Player> GameStatus = new List<Player>();
+            
+            //List<Player> GameStatus = new List<Player>();
             int turnCounter = 0;
             
 
@@ -28,13 +28,13 @@ namespace PaperRockScissor
                     Console.Write("What is your name? ");
                     Player player1 = new Player(Console.ReadLine(), 0, 0, 0);
                     Player player2 = new Player("Computer", 0, 0, 0);
-                    GameStatus.Add(player1);
-                    GameStatus.Add(player2);
 
+                    // initialize game object
+                    var NewGame = new Game(DateTime.Now, player1, player2, false);
                     
                     while (turnCounter < 10)
                     {
-                        Console.Write("{0}, choose: Paper, Rock, or Scissor: ", player1.PlayerName());
+                        Console.Write("{0}, choose: Paper, Rock, or Scissor: ", NewGame.Players[0].PlayerName());
                         string usrchoice;
                         string compchoice;
 
@@ -42,10 +42,10 @@ namespace PaperRockScissor
                         usrchoice = Console.ReadLine();
 
                         // computer chooses
-                        compchoice = ComputerChoice();
+                        compchoice = NewGame.ComputerChoice();
 
                         // Verify Users' input
-                        bool verifiedusr = verifyUsrChoice(usrchoice);
+                        bool verifiedusr = NewGame.verifyUsrChoice(usrchoice);
 
                         // output game status
                         if (verifiedusr)
@@ -73,8 +73,11 @@ namespace PaperRockScissor
 
                     }
 
+                    // final score stuff
+                    NewGame.GameEnd = DateTime.Now;
                     Console.WriteLine("***** Final Score *****");
                     Console.WriteLine(ReadScore(player1, player2));
+                    Console.WriteLine("Game started: {0}, Game Ended: {1}", NewGame.GameStart, NewGame.GameEnd);
                     Console.WriteLine("************************");
                     break;
 
@@ -83,29 +86,7 @@ namespace PaperRockScissor
                 
             }
 
-            bool verifyUsrChoice(string usr)
-            {
-                if (usr == choices[0] || usr == choices[1] || usr == choices[2])
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-                
-            }
-
-            // Generates computers choice
-            string ComputerChoice()
-            {
-                string choice;
-                Random random = new Random(DateTime.Now.Millisecond);
-
-                // selects the List item from the random number
-                choice = choices[random.Next(0, 2)];
-                return choice;
-            }
+          
 
             string ComparePicks(string usr, string comp, Player player1, Player player2)
             {
