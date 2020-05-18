@@ -11,6 +11,7 @@ namespace PaperRockScissor
         private int Win { get; set; }
         private int Lose { get; set; }
         private int Tie { get; set; }
+        private string CurrentPick { get; set; }
 
         public Player(string name, int win, int lose, int tie)
         {

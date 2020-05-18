@@ -48,21 +48,22 @@ namespace PaperRockScissor
                         bool verifiedusr = NewGame.verifyUsrChoice(usrchoice);
 
                         // output game status
-                        if (verifiedusr)
-                        {
-                            Console.WriteLine("Your choice is: " + usrchoice);
-                            Console.WriteLine("The computer chose: " + compchoice);
+                        //if (verifiedusr)
+                        //{
+                        //    Console.WriteLine("Your choice is: " + usrchoice);
+                        //    Console.WriteLine("The computer chose: " + compchoice);
 
-                            // compares user and computer to determine winner.
-                            Console.WriteLine("You " + ComparePicks(usrchoice, compchoice, player1, player2) + "!");
-                            Console.WriteLine("Play again.");
-                            Console.WriteLine();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Your selection is invalid.  Please try again.");
-                            Console.WriteLine();
-                        }
+                        //   // compares user and computer to determine winner.
+                        //    Console.WriteLine("You " + ComparePicks(usrchoice, compchoice, player1, player2) + "!");
+                        //    Console.WriteLine("Play again.");
+                        //    Console.WriteLine();
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine("Your selection is invalid.  Please try again.");
+                        //    Console.WriteLine();
+                        //}
+                        NewGame.Player1Turn();
 
                         turnCounter++;
        

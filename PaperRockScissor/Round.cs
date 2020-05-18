@@ -14,7 +14,7 @@ namespace PaperRockScissor
         }
 
         public Round(string player1, string player2)
-            : this()
+            : this() // this calls the constructor above first
         {
             Selections.Add(player1);
             Selections.Add(player2);

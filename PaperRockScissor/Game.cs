@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace PaperRockScissor
@@ -14,6 +15,7 @@ namespace PaperRockScissor
         string player1Choice;
         string player2Choice;
         string computerChoice;
+        Round round;
 
         public Game()
         {
@@ -40,7 +42,13 @@ namespace PaperRockScissor
             // Verify Users' input
             if (this.verifyUsrChoice(player1Choice))
             {
-                var round = new Round(player1Choice, this.ComputerChoice());
+                round = new Round(player1Choice, this.ComputerChoice());
+
+                if (ComparePicks() == "win")
+                {
+
+                }
+
                 return true;
             }
             else
@@ -74,6 +82,38 @@ namespace PaperRockScissor
             // selects the List item from the random number
             choice = this.Choices[random.Next(0, 2)];
             return choice;
+        }
+
+        string ComparePicks( string usr, string comp, Player player1, Player player2)
+        {
+            string WinLose = "null";
+
+            if (usr == comp)
+            {
+                WinLose = "tie";
+            }
+            else if (usr == "Paper" && comp == "Rock")
+            {
+                WinLose = "win";
+                player1.Winner();
+            }
+            else if (usr == "Rock" && comp == "Scissor")
+            {
+                WinLose = "win";
+                player1.Winner();
+            }
+            else if (usr == "Scissor" && comp == "Paper")
+            {
+                WinLose = "win";
+                player1.Winner();
+            }
+            else
+            {
+                WinLose = "lose";
+                player2.Winner();
+            }
+
+            return WinLose;
         }
 
     }
