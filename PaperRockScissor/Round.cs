@@ -6,18 +6,23 @@ namespace PaperRockScissor
 {
     class Round
     {
-        List<string> Selections;
+        private List<string> _selections { get; set; }
 
         public Round()
         {
-            Selections = new List<string>();
+            _selections = new List<string>();
         }
 
         public Round(string player1, string player2)
             : this() // this calls the constructor above first
         {
-            Selections.Add(player1);
-            Selections.Add(player2);
+            _selections.Add(player1);
+            _selections.Add(player2);
+        }
+
+        public string getSelections(int i)
+        {
+            return _selections[i];
         }
 
     }

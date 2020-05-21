@@ -15,6 +15,7 @@ namespace PaperRockScissor
         string player1Choice;
         string player2Choice;
         string computerChoice;
+        int numberOfTurns;
         Round round;
 
         public Game()
@@ -30,6 +31,15 @@ namespace PaperRockScissor
             this.Players.Add(player1);
             this.Players.Add(player2);
             this.Multiplayer = multiplayer;
+            Console.WriteLine("hi");
+
+            // Game intro
+            _gameIntro();
+        }
+
+        private void _gameIntro()
+        {
+            // intro stuff eventually
         }
 
         public bool Player1Turn()
@@ -42,12 +52,21 @@ namespace PaperRockScissor
             // Verify Users' input
             if (this.verifyUsrChoice(player1Choice))
             {
+                // adds the validated choice to the round
                 round = new Round(player1Choice, this.ComputerChoice());
+                
+                Console.WriteLine("Your choice is: {0}", round.getSelections(0));
+                Console.WriteLine("The computer chose: {0}", round.getSelections(1));
 
-                if (ComparePicks() == "win")
-                {
+                // compares inputs
+                Console.WriteLine("You " + ComparePicks(round) + "!");
+                Console.WriteLine("Play again.");
+                Console.WriteLine();
 
-                }
+                Console.WriteLine("Here's how you're doing: ");
+                Console.WriteLine(ReadScore());
+                Console.WriteLine();
+                
 
                 return true;
             }
@@ -57,6 +76,12 @@ namespace PaperRockScissor
                 Console.WriteLine();
                 return false;
             }
+        }
+
+        public string ReadScore()
+        {
+            string score = this.Players[0].PlayerName() + ": " + this.Players[0].PlayerWins() + ", " + this.Players[1].PlayerName() + ": " + this.Players[1].PlayerWins();
+            return score;
         }
 
         // Validates user's choice
@@ -84,9 +109,11 @@ namespace PaperRockScissor
             return choice;
         }
 
-        string ComparePicks( string usr, string comp, Player player1, Player player2)
+        string ComparePicks(Round choices)
         {
             string WinLose = "null";
+            string usr = choices.getSelections(0);
+            string comp = choices.getSelections(1);
 
             if (usr == comp)
             {
@@ -95,22 +122,26 @@ namespace PaperRockScissor
             else if (usr == "Paper" && comp == "Rock")
             {
                 WinLose = "win";
-                player1.Winner();
+                Players[0].Winner();
+                Players[1].Looser();
             }
             else if (usr == "Rock" && comp == "Scissor")
             {
                 WinLose = "win";
-                player1.Winner();
+                Players[0].Winner();
+                Players[1].Looser();
             }
             else if (usr == "Scissor" && comp == "Paper")
             {
                 WinLose = "win";
-                player1.Winner();
+                Players[0].Winner();
+                Players[1].Looser();
             }
             else
             {
                 WinLose = "lose";
-                player2.Winner();
+                Players[0].Looser();
+                Players[1].Winner();
             }
 
             return WinLose;

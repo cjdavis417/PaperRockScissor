@@ -14,10 +14,6 @@ namespace PaperRockScissor
             int turnCounter = 0;
             
 
-            NewGame();
-
-            void NewGame()
-            {
                 do 
                 {
                     Console.WriteLine("Welcome to - Paper Rock Scissor -");
@@ -34,50 +30,17 @@ namespace PaperRockScissor
                     
                     while (turnCounter < 10)
                     {
-                        Console.Write("{0}, choose: Paper, Rock, or Scissor: ", NewGame.Players[0].PlayerName());
-                        string usrchoice;
-                        string compchoice;
 
-                        // user chooses
-                        usrchoice = Console.ReadLine();
-
-                        // computer chooses
-                        compchoice = NewGame.ComputerChoice();
-
-                        // Verify Users' input
-                        bool verifiedusr = NewGame.verifyUsrChoice(usrchoice);
-
-                        // output game status
-                        //if (verifiedusr)
-                        //{
-                        //    Console.WriteLine("Your choice is: " + usrchoice);
-                        //    Console.WriteLine("The computer chose: " + compchoice);
-
-                        //   // compares user and computer to determine winner.
-                        //    Console.WriteLine("You " + ComparePicks(usrchoice, compchoice, player1, player2) + "!");
-                        //    Console.WriteLine("Play again.");
-                        //    Console.WriteLine();
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("Your selection is invalid.  Please try again.");
-                        //    Console.WriteLine();
-                        //}
                         NewGame.Player1Turn();
 
                         turnCounter++;
-       
-                        Console.WriteLine("Here's how you're doing: ");
-                        Console.WriteLine(ReadScore(player1, player2));
-                        Console.WriteLine();
-                        
 
                     }
 
                     // final score stuff
                     NewGame.GameEnd = DateTime.Now;
                     Console.WriteLine("***** Final Score *****");
-                    Console.WriteLine(ReadScore(player1, player2));
+                    Console.WriteLine(NewGame.ReadScore());
                     Console.WriteLine("Game started: {0}, Game Ended: {1}", NewGame.GameStart, NewGame.GameEnd);
                     Console.WriteLine("************************");
                     break;
@@ -87,48 +50,9 @@ namespace PaperRockScissor
                 
             }
 
-          
-
-            string ComparePicks(string usr, string comp, Player player1, Player player2)
-            {
-                string WinLose = "null";
-                
-                if (usr == comp)
-                {
-                    WinLose = "tie";
-                }
-                else if (usr == "Paper" && comp == "Rock")
-                {
-                    WinLose = "win";
-                    player1.Winner();
-                }
-                else if (usr == "Rock" && comp == "Scissor")
-                {
-                    WinLose = "win";
-                    player1.Winner();
-                }
-                else if (usr == "Scissor" && comp == "Paper")
-                {
-                    WinLose = "win";
-                    player1.Winner();
-                }
-                else
-                {
-                    WinLose = "lose";
-                    player2.Winner();
-                }
-                 
-                return WinLose;
-            }
-
-            string ReadScore(Player player1, Player player2)
-            {
-                string score = player1.PlayerName() + ": " + player1.PlayerWins() + ", " + player2.PlayerName() + ": " + player2.PlayerWins();
-                return score;
-            }
 
         }
 
         
-    }
+    
 }
