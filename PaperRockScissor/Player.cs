@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 
 namespace PaperRockScissor
@@ -10,13 +11,14 @@ namespace PaperRockScissor
         private int Win { get; set; }
         private int Lose { get; set; }
         private int Tie { get; set; }
+        private string CurrentPick { get; set; }
 
         public Player(string name, int win, int lose, int tie)
         {
-            Name = name;
-            Win = win;
-            Lose = lose;
-            Tie = tie;
+            this.Name = name;
+            this.Win = win;
+            this.Lose = lose;
+            this.Tie = tie;
         }
 
         public string PlayerName() { return Name; }
